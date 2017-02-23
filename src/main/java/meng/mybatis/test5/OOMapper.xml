@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="userMapper5">
+
+	<!-- 嵌套结果：使用嵌套结果映射来处理重复的联合结果的子集 -->
+	<select id="getClassForId3" parameterType="int" resultMap="ClassResultMap3">
+		SELECT
+		* FROM teacher t,class c,student s WHERE c.teacher_id=t.t_id AND
+		c.c_id=#{id} AND s.class_id=c.c_id
+	</select>
+
+	<resultMap type="_Classes2" id="ClassResultMap3">
+		<id property="cid" column="c_id" />
+		<result property="cname" column="c_name" />
+		<association property="teacher" column="teacher_id"
+			javaType="_Teacher2">
+			<id property="tid" column="t_id" />
+			<result property="tname" column="t_name" />
+		</association>
+		<!-- ofType指定students集合中的元素的对象类型 -->
+		<collection property="students" ofType="_Student2">
+			<id property="sid" column="s_id" />
+			<result property="sname" column="s_name" />
+		</collection>
+	</resultMap>
+
+	<!-- 嵌套查询方式, 通过执行另外一个SQL映射语句来返回预期的复杂类型 -->
+	<select id="getClassForId4" parameterType="int" resultMap="ClassResultMap4">
+		select * from class where c_id=#{id}
+	</select>
+
+	<resultMap type="_Classes2" id="ClassResultMap4">
+		<id property="cid" column="c_id" />
+		<result property="cname" column="c_name" />
+		<association property="teacher" column="teacher_id"
+			javaType="_Teacher2" select="getTeacherById2"></association>
+		<!-- c_id会传输到getStudentById的 class_id=#{id} -->
+		<collection property="students" ofType="_Student2" column="c_id"
+			select="getStudentById"></collection>
+	</resultMap>
+
+	<select id="getTeacherById2" parameterType="int" resultType="_Teacher2">
+		select t_id tid, t_name tname from teacher where t_id=#{id}
+	</select>
+
+	<select id="getStudentById" parameterType="int" resultType="_Student2">
+		select s_id sid, s_name sname from student where class_id=#{id}
+	</select>
+
+</mapper>

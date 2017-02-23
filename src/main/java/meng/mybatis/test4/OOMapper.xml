@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="userMapper4">
+
+	<!-- 方式二：嵌套结果：使用嵌套结果映射来处理重复的联合结果的子集 -->
+	<select id="getClassForId" parameterType="int" resultMap="ClassResultMap">
+		SELECT
+		* FROM teacher t,class c WHERE c.teacher_id=t.t_id AND
+		c.c_id=#{id}
+	</select>
+
+	<resultMap type="_Classes" id="ClassResultMap">
+		<id property="cid" column="c_id" />
+		<result property="cname" column="c_name" />
+		<association property="teacher" column="teacher_id"
+			javaType="_Teacher">
+			<id property="tid" column="t_id" />
+			<result property="tname" column="t_name" />
+		</association>
+	</resultMap>
+
+	<!-- 方式一：嵌套查询方式, 通过执行另外一个SQL映射语句来返回预期的复杂类型 -->
+	<select id="getClassForId2" parameterType="int" resultMap="ClassResultMap2">
+		select * from class where c_id=#{id}
+	</select>
+
+	<resultMap type="_Classes" id="ClassResultMap2">
+		<id property="cid" column="c_id" />
+		<result property="cname" column="c_name" />
+		<association property="teacher" column="teacher_id"
+			javaType="_Teacher" select="getTeacherById"></association>
+	</resultMap>
+
+	<select id="getTeacherById" parameterType="int" resultType="_Teacher">
+		select t_id tid, t_name tname from teacher where t_id=#{id}
+	</select>
+
+</mapper>
