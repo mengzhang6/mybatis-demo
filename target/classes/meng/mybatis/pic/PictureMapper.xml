@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="picmapper">
+
+	<select id="getPicByName" parameterType="String" resultMap="PicResultMap">
+		SELECT * FROM pic WHERE picname=#{picname}
+	</select>
+	
+	<resultMap type="_Picture" id="PicResultMap">
+		<id property="idpic" column="idpic" />
+		<result property="picname" column="picname" />
+		<result property="img" column="img" typeHandler="meng.mybatis.pic.PicBlobTypeHandler"/>
+		<result property="version" column="version" />
+		<result property="proname" column="proname" />
+	</resultMap>
+
+</mapper>

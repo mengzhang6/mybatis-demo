@@ -13,6 +13,8 @@
 		<typeAlias type="meng.mybatis.test5.Classes" alias="_Classes2" />
 		<typeAlias type="meng.mybatis.test5.Teacher" alias="_Teacher2" />
 		<typeAlias type="meng.mybatis.test5.Student" alias="_Student2" />
+		
+		<typeAlias type="meng.mybatis.pic.Picture" alias="_Picture" />
 	</typeAliases>
 	
 	<!-- 数据库信息 -->
@@ -42,5 +44,7 @@
 		<mapper resource="meng/mybatis/test5/OOMapper.xml" />
 		<!-- 另一种方法注册 -->
 		<mapper class="meng.mybatis.test3.UserMapper" />
+		
+		<mapper resource="meng/mybatis/pic/PictureMapper.xml" />
 	</mappers>
 </configuration>
