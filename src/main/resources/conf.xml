@@ -5,29 +5,12 @@
 	<!-- 注册db的配置文件 -->
 	<properties resource="db.propterties" />
 	
-	<!-- 定义别名 -->
-	<typeAliases>
-		<typeAlias type="meng.mybatis.test4.Classes" alias="_Classes" />
-		<typeAlias type="meng.mybatis.test4.Teacher" alias="_Teacher" />
 
-		<typeAlias type="meng.mybatis.test5.Classes" alias="_Classes2" />
-		<typeAlias type="meng.mybatis.test5.Teacher" alias="_Teacher2" />
-		<typeAlias type="meng.mybatis.test5.Student" alias="_Student2" />
-		
-		<typeAlias type="meng.mybatis.pic.Picture" alias="_Picture" />
-	</typeAliases>
-	
 	<!-- 数据库信息 -->
 	<environments default="development">
 		<environment id="development">
 			<transactionManager type="JDBC" />
 			<dataSource type="POOLED">
-				<!-- 
-				<property name="driver" value="com.mysql.jdbc.Driver" />
-				<property name="url" value="jdbc:mysql://127.0.0.1:3306/mybatis" />
-				<property name="username" value="root" />
-				<property name="password" value="root" />
-				 -->
 				<property name="driver" value="${driver}" />
 				<property name="url" value="${url}" />
 				<property name="username" value="${username}" />
@@ -38,13 +21,6 @@
 	
 	<!-- mapper注册 -->
 	<mappers>
-		<mapper resource="meng/mybatis/test/userMapper.xml" />
-		<mapper resource="meng/mybatis/test2/userMapper.xml" />
-		<mapper resource="meng/mybatis/test4/OOMapper.xml" />
-		<mapper resource="meng/mybatis/test5/OOMapper.xml" />
-		<!-- 另一种方法注册 -->
-		<mapper class="meng.mybatis.test3.UserMapper" />
-		
-		<mapper resource="meng/mybatis/pic/PictureMapper.xml" />
+		<mapper resource="mapper/userMapper.xml" />
 	</mappers>
 </configuration>

@@ -13,10 +13,10 @@ public class Test {
 		Reader reader = Resources.getResourceAsReader("conf.xml");
 		SqlSessionFactory factory = new SqlSessionFactoryBuilder()
 				.build(reader);
-		SqlSession session = factory.openSession();
+		SqlSession sqlSession = factory.openSession();
 
 		String statement = "userMapper.findUserByUserid";
-		User user = session.selectOne(statement, 1);
+		User user = sqlSession.selectOne(statement, 1);
 		System.out.println(user);
 	}
 }
