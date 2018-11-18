@@ -13,30 +13,20 @@
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
         <property name="url" value="jdbc:mysql://127.0.0.1:3306/mybatis"/>
         <property name="username" value="root"/>
-        <property name="password" value="root"/>
+        <property name="password" value="123456"/>
     </bean>
 
-    <!-- MyBatis配置 -->
-    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <!-- MyBatis配置 org.mybatis.spring.SqlSessionFactoryBean-->
+    <bean id="sqlSessionFactory" class="com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <property name="configLocation" value="classpath:conf.xml"/>
         <property name="mapperLocations" value="classpath:mapper/**/*Mapper.xml"/>
-        <property name="plugins">
-            <array>
-                <bean class="com.github.pagehelper.PageInterceptor">
-                    <property name="properties">
-                        <value>
-                            helperDialect=mysql
-                        </value>
-                    </property>
-                </bean>
-            </array>
-        </property>
+        <property name="typeAliasesPackage" value="meng.mybatis.test"/>
     </bean>
 
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <!--UserMapper接口所在位置-->
-        <property name="basePackage" value="meng.mybatis.test"/>
+        <property name="basePackage" value="meng.mybatis.test,com.baomidou.ant.meng.mapper"/>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>
 </beans>

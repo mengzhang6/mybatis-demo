@@ -4,11 +4,11 @@
 <!-- 命名空间 -->
 <mapper namespace="meng.mybatis.test.UserMapper">
     <!-- resultType可以定义简称 -->
-    <select id="findUserByUserid" parameterType="int" resultType="meng.mybatis.test.User">
+    <select id="findUserByUserid" parameterType="int" resultType="User">
 		select * from users where id = #{id}
 	</select>
 
-    <select id="findUsers" resultType="meng.mybatis.test.User">
+    <select id="findUsers" resultType="User">
 		select * from users
 	</select>
 </mapper>

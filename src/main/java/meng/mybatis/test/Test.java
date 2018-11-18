@@ -1,18 +1,11 @@
 package meng.mybatis.test;
 
-import java.io.IOException;
-import java.io.Reader;
-import java.util.List;
-
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
-import org.apache.ibatis.io.Resources;
-import org.apache.ibatis.session.RowBounds;
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import com.baomidou.ant.meng.mapper.EmployeeMapper;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import java.io.IOException;
+import java.util.List;
 
 /**
  * 参考资料：https://github.com/pagehelper/Mybatis-PageHelper/blob/master/wikis/zh/HowToUse.md
@@ -21,19 +14,15 @@ public class Test {
     public static void main(String[] args) throws IOException {
         ApplicationContext context = new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
 
+//        EmployeeMapper employeeMapper = context.getBean(EmployeeMapper.class);
+//        printList(employeeMapper.selectList(null));
+
         UserMapper userMapper = context.getBean(UserMapper.class);
-
-        // 第三页 每页5条
-        PageHelper.startPage(3, 5);
-
-        // 从下标为3的开始 每页5条
-        //PageHelper.offsetPage(3, 5);
-
-        PageInfo pageInfo = new PageInfo(userMapper.findUsers());
-        System.out.println(pageInfo);
+        User user =   userMapper.selectById(1);
+        System.out.println("args = [" + user + "]");
     }
 
-    public static void printer(List<User> list) {
+    public static void printList(List list) {
         System.out.println("->->->->->->-->->->->->->-->->->->->->->->");
         for (Object obj : list) {
             System.out.println(obj);
