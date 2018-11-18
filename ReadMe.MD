@@ -141,7 +141,7 @@ public class User {
 	private String stuId;
 }
 ```
-
+![](https://oscimg.oschina.net/oscnet/bf3edd5cbc79f3cef6398a1cc6392515289.jpg)
 
 
 ## 测试
