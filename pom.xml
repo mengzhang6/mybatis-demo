@@ -38,13 +38,13 @@
     <build>
         <resources>
             <!--指定xml文件位置-->
-            <resource>
+            <!--<resource>
                 <directory>src/main/java</directory>
                 <includes>
                     <include>**/*.xml</include>
                 </includes>
                 <filtering>true</filtering>
-            </resource>
+            </resource>-->
         </resources>
     </build>
 </project>
